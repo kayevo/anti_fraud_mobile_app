@@ -33,7 +33,17 @@ class CreditCardPaymentActivity : AppCompatActivity() {
                     showMessage("We cannot complete your payment, ask for support on support@payment.com")
                 }
                 else -> {
-                    showMessage("Payment its gonna be proccessed.")
+                    viewModel.pay(10.0) // TODO remove mock value
+                }
+            }
+        }
+        viewModel.paymentAccepted.observe(this) { result ->
+            when (result) {
+                true -> {
+                    showMessage("Your value was payed successfully")
+                }
+                else -> {
+                    showMessage("Payment was not accepted, verify the credit card information or contact your credit card issuer.")
                 }
             }
         }
