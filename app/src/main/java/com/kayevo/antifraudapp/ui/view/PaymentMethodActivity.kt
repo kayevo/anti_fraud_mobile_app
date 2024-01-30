@@ -1,10 +1,8 @@
-package com.kayevo.antifraudapp.ui.activity
+package com.kayevo.antifraudapp.ui.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kayevo.antifraudapp.R
-import com.kayevo.antifraudapp.databinding.ActivityCreditCardPaymentBinding
 import com.kayevo.antifraudapp.databinding.ActivityPaymentBinding
 
 class PaymentMethodActivity : AppCompatActivity() {

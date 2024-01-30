@@ -13,13 +13,13 @@
         android:theme="@style/Theme.AntiFraudApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.BankTransferPaymentActivity"
+            android:name=".ui.view.BankTransferPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.CreditCardPaymentActivity"
+            android:name=".ui.view.CreditCardPaymentActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.PaymentMethodActivity"
+            android:name=".ui.view.PaymentMethodActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

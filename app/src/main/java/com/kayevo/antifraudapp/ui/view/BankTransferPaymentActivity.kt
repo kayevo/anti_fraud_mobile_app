@@ -1,4 +1,4 @@
-package com.kayevo.antifraudapp.ui.activity
+package com.kayevo.antifraudapp.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
