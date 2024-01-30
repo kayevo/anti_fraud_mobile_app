@@ -20,8 +20,14 @@ class CreditCardPaymentActivity : AppCompatActivity() {
     private fun setListeners() {
         with(view) {
             btnPay.setOnClickListener {
-                // TODO remove mock value
-                viewModel.verifyPaymentFraud(10.0)
+                viewModel.verifyPaymentFraud(
+                    paymentValue = txtPaymentValue.text.toString().toDouble(),
+                    payerCountry = txtPayerCountry.text.toString(),
+                    creditCardNumber = txtCreditCardNumber.text.toString().toLong(),
+                    payerId = txtPayerId.text.toString(),
+                    receiverId = txtReceiverId.text.toString(),
+                    receiverCountry = txtReceiverCountry.text.toString(),
+                )
             }
         }
     }
@@ -32,8 +38,15 @@ class CreditCardPaymentActivity : AppCompatActivity() {
                 true -> {
                     showMessage("We cannot complete your payment, ask for support on support@payment.com")
                 }
+
                 else -> {
-                    viewModel.pay(10.0) // TODO remove mock value
+                    with(view) {
+                        viewModel.pay(
+                            paymentValue = txtPaymentValue.text.toString().toDouble(),
+                            creditCardNumber = txtCreditCardNumber.text.toString(),
+                            receiverId = txtReceiverId.text.toString()
+                        )
+                    }
                 }
             }
         }
@@ -42,6 +55,7 @@ class CreditCardPaymentActivity : AppCompatActivity() {
                 true -> {
                     showMessage("Your value was payed successfully")
                 }
+
                 else -> {
                     showMessage("Payment was not accepted, verify the credit card information or contact your credit card issuer.")
                 }
