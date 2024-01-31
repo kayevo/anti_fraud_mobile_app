@@ -4,9 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kayevo.antifraudapp.repository.PaymentService
+import com.kayevo.antifraudapp.repository.FraudDetectionService
 import kotlinx.coroutines.launch
 
-class CreditCardPaymentViewModel : ViewModel() {
+class CreditCardPaymentViewModel(
+    val fraudDetectionService: FraudDetectionService,
+    val paymentService: PaymentService
+) : ViewModel() {
     private val _paymentIsFraud = MutableLiveData<Boolean>()
     val paymentIsFraud: LiveData<Boolean> get() = _paymentIsFraud
     private val _paymentAccepted = MutableLiveData<Boolean>()
@@ -21,8 +26,15 @@ class CreditCardPaymentViewModel : ViewModel() {
         receiverCountry: String
     ) {
         viewModelScope.launch {
-            // TODO remove mock result
-            _paymentIsFraud.postValue(false)
+            val isFraud = fraudDetectionService.verifyPaymentFraud(
+                paymentValue = paymentValue,
+                payerCountry = payerCountry,
+                creditCardNumber = creditCardNumber,
+                payerId = payerId,
+                receiverId = receiverId,
+                receiverCountry = receiverCountry,
+            )
+            _paymentIsFraud.postValue(isFraud)
         }
     }
 
@@ -32,8 +44,12 @@ class CreditCardPaymentViewModel : ViewModel() {
         receiverId: String
     ) {
         viewModelScope.launch {
-            // TODO remove mock result
-            _paymentAccepted.postValue(true)
+            val isPaymentAccepted = paymentService.payWithCreditCard(
+                paymentValue=paymentValue,
+                creditCardNumber=creditCardNumber,
+                receiverId=receiverId,
+            )
+            _paymentAccepted.postValue(isPaymentAccepted)
         }
     }
 }

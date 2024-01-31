@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.kayevo.antifraudapp.databinding.ActivityCreditCardPaymentBinding
+import com.kayevo.antifraudapp.repository.implementation.FeedzaiFraudDetectionService
+import com.kayevo.antifraudapp.repository.implementation.JPMorganPaymentService
 import com.kayevo.antifraudapp.ui.viewmodel.CreditCardPaymentViewModel
 
 class CreditCardPaymentActivity : AppCompatActivity() {
     private lateinit var view: ActivityCreditCardPaymentBinding
-    private var viewModel = CreditCardPaymentViewModel()
+    private var viewModel = CreditCardPaymentViewModel(
+        FeedzaiFraudDetectionService(),
+        JPMorganPaymentService()
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         view = ActivityCreditCardPaymentBinding.inflate(layoutInflater)
